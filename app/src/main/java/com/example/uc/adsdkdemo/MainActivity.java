@@ -92,35 +92,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         }
     }
 
-    private void m1() {
+
+    private void v1() {
 
     }
 
-    private void m2() {
-
-    }
-
-    private void m3() {
-
-    }
-
-    private void t1() {
-
-    }
-
-    private void t2() {
-
-    }
-
-    private void t3() {
-
-    }
-
-    private void q() {
-
-    }
-
-    private void q1() {
+    private void v2() {
 
     }
 
