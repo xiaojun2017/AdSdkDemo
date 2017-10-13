@@ -112,4 +112,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     private void test3() {
 
     }
+
+    /**
+     * test4 method
+     */
+    private void test4() {
+
+    }
 }
