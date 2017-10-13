@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AdSdkDemo</string>
+    <string name="ad_type">AdType</string>
+</resources>
