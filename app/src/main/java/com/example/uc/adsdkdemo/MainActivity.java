@@ -96,4 +96,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
     //a
     //b
+    //c
+    //d
 }
