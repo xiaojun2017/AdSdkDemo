@@ -91,4 +91,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                 break;
         }
     }
+
+    /**
+     * test1 method
+     */
+    private void test1() {
+
+    }
 }
