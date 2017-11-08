@@ -1,7 +1,10 @@
 package com.example.uc.adsdkdemo;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +12,14 @@ import android.widget.Spinner;
 
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import okio.BufferedSink;
+import okio.Okio;
 
 public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
     private AdView mBannerAdView;
@@ -26,9 +37,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         initView();
     }
 
-    void t(){
+    void t() {
 
     }
+
     private void initView() {
         mAdSrcSpinner = (Spinner) findViewById(R.id.ad_src_spinner);
         mAdShowTypeSpinner = (Spinner) findViewById(R.id.ad_show_type_spinner);
@@ -58,6 +70,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
             default:
                 break;
         }
+
+        testOkIO();
     }
 
     @Override
@@ -92,19 +106,57 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         }
     }
 
+    private void filePermission() {
+        int REQUEST_EXTERNAL_STORAGE = 1;
+        String[] PERMISSIONS_STORAGE = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+        int permission = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-    //1
-    //2
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    MainActivity.this,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
 
+    private void testOkIO() {
+        filePermission();
+        try {
+            File file = new File("/sdcard/xiaojun.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedSink sink = createSink(file);
+            sink.writeUtf8("\nxiaojun");
+            sink.writeUtf8("hello");
+            sink.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    private BufferedSink createSink(File f) {
+        if (f == null) {
+            return null;
+        }
 
-    //a
-    //b
-    //c
-    //d
+        BufferedSink sink = null;
+        try {
+            FileOutputStream fos = new FileOutputStream(f, true);
+            sink = Okio.buffer(Okio.sink(fos));
+        } catch (FileNotFoundException ignored) {
+        }
 
-    //AA
+        return sink;
+    }
 
-    //BB
-
+    //111111111111111111
+    //222222222222222222
+    //333333333333333333
+    //444444444444444444
 }
